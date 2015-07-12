@@ -6,7 +6,9 @@ def dead(name):
     url = wiki_url(name)
     r = requests.get(url)
     soup = BeautifulSoup(r.text, "lxml")
-    if soup.find_all("th", text="Died"):
+    if soup.find_all("a", text="disambiguation"):
+        print "Name is ambiguous"
+    elif soup.find_all("th", text="Died"):
 	    print "{0} is dead".format(name)
     else:
 	    print "{0} is still alive".format(name)
