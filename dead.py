@@ -3,7 +3,9 @@ import requests
 from bs4 import BeautifulSoup
 
 def dead(name):
+    name = name.title()
     url = wiki_url(name)
+    print "Url is {0}".format(url)
     r = requests.get(url)
     name_list = name.split()
     first_name = name_list[0]
@@ -35,5 +37,5 @@ if __name__ == "__main__":
         dead(name)
 
     except IndexError:
-        print "Please enter a name (e.g. \"James Brown\" or \"Mark E Smith\")"
+        print "Please enter a name (e.g. \"James Brown\" or \"Mark E. Smith\")"
         exit(1)
