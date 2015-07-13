@@ -5,7 +5,6 @@ from bs4 import BeautifulSoup
 def dead(name):
     name = name.title()
     url = wiki_url(name)
-    print "Url is {0}".format(url)
     r = requests.get(url)
     name_list = name.split()
     first_name = name_list[0]
