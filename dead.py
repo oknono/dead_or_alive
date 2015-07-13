@@ -5,9 +5,18 @@ from bs4 import BeautifulSoup
 def dead(name):
     url = wiki_url(name)
     r = requests.get(url)
+    name_list = name.split()
+    first_name = name_list[0]
     soup = BeautifulSoup(r.text, "lxml")
     if soup.find_all("a", text="disambiguation"):
-        print "Name is ambiguous"
+        print "Name is ambiguous, try one of the following:"
+        name_url = "/wiki/" + first_name
+        for link in soup.find_all('a'):
+            if link.has_attr('href') and link['href'].startswith(name_url):
+                result =  link['href']
+                stripped_result = result[6:].replace('_', ' ')
+                if stripped_result != name:
+                    print stripped_result
     elif soup.find_all("th", text="Died"):
 	    print "{0} is dead".format(name)
     else:
