@@ -6,12 +6,10 @@ def dead(name):
     name = name.title()
     url = wiki_url(name)
     r = requests.get(url)
-    name_list = name.split()
-    first_name = name_list[0]
     soup = BeautifulSoup(r.text, "lxml")
     if soup.find_all("a", text="disambiguation"):
         print "Name is ambiguous, try one of the following:"
-        name_url = "/wiki/" + first_name
+        name_url = "/wiki/" + name.split()[0]
         for link in soup.find_all('a'):
             if link.has_attr('href') and link['href'].startswith(name_url):
                 result =  link['href']
