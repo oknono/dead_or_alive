@@ -14,14 +14,9 @@ def dead(name):
 	    print "{0} is still alive".format(name)
 
 def wiki_url(name):
-    name = name.split()
+    name = name.replace(' ', '_')
     url = 'https://en.wikipedia.org/wiki/'
-    for index in range(len(name)):
-        element = name[index]
-        url += element
-        if index < len(name) - 1:
-            url += '_'
-    return url
+    return url + name
 
 if __name__ == "__main__":
     try:
