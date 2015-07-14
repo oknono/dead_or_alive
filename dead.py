@@ -8,7 +8,9 @@ def dead(name):
     url = wiki_url.name_to_wiki_url(name)
     r = requests.get(url)
     soup = BeautifulSoup(r.text, "lxml")
-    if soup.find_all("a", text="disambiguation"):
+    if soup.find("div", {"class" : "noarticletext"}): 
+        print "I don't know that person"
+    elif soup.find("a", text="disambiguation"):
         print "Name is ambiguous, try one of the following:"
         name_url = "/wiki/" + name.split()[0]
         for link in soup.find_all('a'):
@@ -30,5 +32,5 @@ if __name__ == "__main__":
         dead(name)
 
     except IndexError:
-        print "Please enter a name (e.g. \"James Brown\" or \"Mark E. Smith\")"
+        print "Please enter a name (e.g. \"James Brown\" or \"Mark E. Smith\""
         exit(1)
