@@ -7,7 +7,7 @@ def not_exist(name):
 	return name.find("div", {"class" : "noarticletext"})
 
 def is_ambiguous(name):
-	return name.find_all("a", text="disambiguation")
+	return name.find("a", text="disambiguation")
         
 def print_links(doc, name):
     links = doc.find_all('a')
@@ -20,5 +20,5 @@ def print_links(doc, name):
                 print stripped_result
 
 def is_dead(name):
-	return name.find_all("th", text="Died")
+	return name.find("th", text="Died")
         
