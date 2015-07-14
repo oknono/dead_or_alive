@@ -1,10 +1,11 @@
 import sys
 import requests
 from bs4 import BeautifulSoup
+import wiki_url
 
 def dead(name):
     name = name.title()
-    url = wiki_url(name)
+    url = wiki_url.name_to_wiki_url(name)
     r = requests.get(url)
     soup = BeautifulSoup(r.text, "lxml")
     if soup.find_all("a", text="disambiguation"):
@@ -21,16 +22,11 @@ def dead(name):
     else:
 	    print "{0} is still alive".format(name)
 
-def wiki_url(name):
-    name = name.replace(' ', '_')
-    url = 'https://en.wikipedia.org/wiki/'
-    return url + name
-
 if __name__ == "__main__":
     try:
         args = sys.argv[:]
         script = args.pop(0)
-        name = args.pop(0)
+        name = ' '.join(args)
         dead(name)
 
     except IndexError:
