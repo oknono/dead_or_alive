@@ -1,4 +1,5 @@
 def wiki_json(name):
+	name = name.strip().title()
     url = 'https://en.wikipedia.org/w/api.php?action=query&titles={0}&continue=&prop=categories&format=json'.format(name)
     return url
 
