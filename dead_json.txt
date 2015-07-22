@@ -1,0 +1,4 @@
+# Get Json Data
+# Replace <NAME> with name
+
+https://en.wikipedia.org/w/api.php?format=json&action=query&titles=<NAME>&prop=revisions&rvprop=content
