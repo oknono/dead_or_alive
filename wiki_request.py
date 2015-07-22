@@ -3,18 +3,25 @@ def wiki_json(name):
     url = 'https://en.wikipedia.org/w/api.php?action=query&titles={0}&continue=&prop=categories&format=json'.format(name)
     return url
 
-def birth(response):
-	return response.json()["query"]["pages"].values()[0]["categories"][0]
-
-def death(response):
-	return response.json()["query"]["pages"].values()[0]["categories"][1]
+def categories(response):
+	return response.json()["query"]["pages"].values()[0]["categories"]
 
 def is_ambiguous(dic):
-	return 'disambiguation' in dic["title"]
-           
+    for item in dic:
+        if 'disambiguation' in item["title"]:
+            return True
+    return False
+     
 def is_dead(dic):
-	return 'deaths' in dic["title"]
+    for item in dic:
+        if 'deaths' in item["title"]:
+            return True
+    return False
 
 def was_born(dic):
-    return 'births' in dic["title"]
+    for item in dic:
+        if 'births' in item["title"]:
+            return True
+    return False
+    
       
