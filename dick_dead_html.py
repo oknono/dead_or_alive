@@ -1,11 +1,11 @@
 from time import time
 import requests 
-from bs4 import BeautifulSoup
+from BeautifulSoup import BeautifulSoup
 from wiki_url import is_dead
 
 def dick_dead():
     r = requests.get('https://en.wikipedia.org/wiki/Dick_Cheney')
-    soup = BeautifulSoup(r.text, "lxml")
+    soup = BeautifulSoup(r.text)
     if is_dead(soup):
         print "Yes, Dick is dead!"
     else:
