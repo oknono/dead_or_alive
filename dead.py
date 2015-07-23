@@ -1,13 +1,13 @@
 import sys
 import requests
-from bs4 import BeautifulSoup
+from BeautifulSoup import BeautifulSoup
 import wiki_url
 
 def dead(name):
     name = name.title()
-    url = wiki_url.name_to_wiki_url(name)
+    url = "https://en.wikipedia.org/w/api.php?action=query&titles={0}&continue=&prop=categories&format=json".format(name)
     r = requests.get(url)
-    soup = BeautifulSoup(r.text, "lxml")
+    soup = BeautifulSoup(r.text)
     if wiki_url.not_exist(soup):
         print "I don't know this person"   
     elif wiki_url.is_ambiguous(soup):
