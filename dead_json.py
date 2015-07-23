@@ -1,33 +1,34 @@
 import requests
 import sys
-from wiki_request import wiki_json, birth, death, is_ambiguous, is_dead, was_born
+from time import time
+from wiki_request import wiki_json, categories, is_ambiguous, is_dead, was_born
 
 def dead(name):
-    name = name.strip().title()
-    url = wiki_json(name)
-    r = requests.get(url)
-    try:
-        born = birth(r)
-        dead = death(r)
-        if is_ambiguous(born):
-            print "Not sure who you're talking about"
-        elif is_dead(dead):
-            print "{0} is dead".format(name)
-        elif was_born(born):
-            print "{0} is alive".format(name)
-        else:
-            print "No Birth date / Not a person"
-
-    except KeyError:
-        print "Person/Wikipediapage does not exist"
-
-if __name__ == "__main__":
-    try:
-        args = sys.argv[:]
-        script = args.pop(0)
-        name = ' '.join(args)
-        dead(name)
-
-    except IndexError:
+    if name:
+        try: 
+            url = wiki_json(name)
+            r = requests.get(url)
+            data = categories(r)
+            if is_ambiguous(data):
+                print "Not sure who you're talking about"
+            elif is_dead(data):
+                print "{0} is dead".format(name.title())
+            elif was_born(data):
+                print "{0} is alive".format(name.title())
+            else:
+                print "No Birth date / Not a person"
+        except KeyError:
+            print "Person/Wikipediapage does not exist"
+    else:
         print "Please enter a name (e.g. \"James Brown\" or \"Mark E. Smith\""
-        exit(1)
+        
+if __name__ == "__main__":
+    args = sys.argv[:]
+    script = args.pop(0)
+    name = ' '.join(args)
+    t0 = time()
+    dead(name)
+    t1 = time()
+    print "Calling Wikipedia API took {0} seconds".format(t1-t0)
+
+   
