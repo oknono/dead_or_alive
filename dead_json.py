@@ -1,7 +1,7 @@
 import requests
 import sys
 from time import time
-from wiki_request import wiki_json, categories, is_ambiguous, is_dead, was_born
+from wiki_JSON import wiki_json, categories, is_ambiguous, is_dead, was_born
 
 def dead(name):
     if name:
@@ -18,7 +18,7 @@ def dead(name):
             else:
                 print "No Birth date / Not a person"
         except KeyError:
-            print "Person/Wikipediapage does not exist"
+            print "Wikipedia page does not exist"
     else:
         print "Please enter a name (e.g. \"James Brown\" or \"Mark E. Smith\""
         
