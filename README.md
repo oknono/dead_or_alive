@@ -11,4 +11,5 @@ Version 1: An exercise using HTTP Requests (http://docs.python-requests.org/en/l
 
 Version 2: An exercise using HTTP Requests (http://docs.python-requests.org/en/latest/) and the wikipedia API (https://www.mediawiki.org/wiki/API:Main_page)
 
+See the current version online @ http://www.deadyet.xyz
 
