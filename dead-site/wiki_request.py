@@ -25,11 +25,13 @@ class Wiki_Person(object):
             print "{} is not a wikipedia page".format(self._name)
     
     def is_dead(self):
-        for item in self.categories:
-            if 'deaths' in item:
-                return True
-        return False
-
+        if self.is_person():
+            for item in self.categories:
+                if 'deaths' in item:
+                    return True
+            return False
+        else:
+            print "{0} is not recognized as a valid wikipedia entry for a person".format(self._name)
 
     def is_ambiguous(self):
         for item in self.categories:
