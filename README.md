@@ -1,6 +1,5 @@
 # dead_or_alive
-Check wether a person is alive or dead - using Wikipedia as a reference
-Given a name, return if:
+Check wether a person is alive or dead - using Wikipedia as a reference. Given a name, return if:
 - Person is dead (e.g. James Brown)
 - Person is alive (e.g. Dick Cheney)
 - Person's name is ambiguous (optional: give suggestions)
