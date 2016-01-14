@@ -22,25 +22,31 @@ class Wiki_Person(object):
             cat_list = self._response["query"]["pages"].values()[0]["categories"]
             return [item["title"][9:] for item in cat_list]
         except KeyError:
-            print "{} is not a wikipedia page".format(self._name)
+            return False
     
     def is_dead(self):
-        if self.is_person():
+        try:
             for item in self.categories:
                 if 'deaths' in item:
                     return True
             return False
-        else:
-            print "{0} is not recognized as a valid wikipedia entry for a person".format(self._name)
-
+        except TypeError:
+            return False
+            
     def is_ambiguous(self):
-        for item in self.categories:
-            if 'disambiguation' in item:
-                return True
-        return False
+        try:
+            for item in self.categories:
+                if 'disambiguation' in item:
+                    return True
+            return False
+        except TypeError:
+            return False
 
     def is_person(self):
-        for item in self.categories:
-            if 'births' in item:
-                return True
-        return False
+        try:
+            for item in self.categories:
+                if 'births' in item:
+                    return True
+            return False
+        except TypeError:
+            return False
