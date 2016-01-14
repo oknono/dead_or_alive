@@ -37,7 +37,7 @@ class Wiki_Person(object):
                 return True
         return False
 
-    def was_born(self):
+    def is_person(self):
         for item in self.categories:
             if 'births' in item:
                 return True
